@@ -1,0 +1,1 @@
+Framework similar to ExpressJS adapted to the SOE SWG protocol for making SWG clients/servers
