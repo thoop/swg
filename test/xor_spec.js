@@ -6,14 +6,14 @@ describe('xor', function() {
 	describe('encrypt', function() {
 
 		it('should encrypt the anh example correctly', function() {
-			var example_unencrypted = '00010002AB43E3D500FF001145327643D4F100';
-			var example_encrypted = '1D4F3285B60CD150B6F3D141F3C1A7022702F3';
+			var example_unencrypted = '00010002ab43e3d500ff001145327643d4f100';
+			var example_encrypted = '1d4f3285b60cd150b6f3d141f3c1a7022702f3';
 
 			var encrypted = xor.encrypt({
 				buffer: new Buffer(example_unencrypted, 'hex'),
-				crcSeed: '1D4E3287'
+				crcSeed: 2268220957
 			});
-			encrypted.toString('hex').toUpperCase().should.equal(example_encrypted);
+			encrypted.toString('hex').should.equal(example_encrypted);
 		})
 
 		it('should encrypt this correctly', function() {
@@ -22,7 +22,7 @@ describe('xor', function() {
 
 			var encrypted = xor.encrypt({
 				buffer: new Buffer(unencrypted, 'hex'),
-				crcSeed: 'a50a8e8a'
+				crcSeed: 2324564645
 			});
 			encrypted.toString('hex').should.equal(expected);
 		})
@@ -31,14 +31,14 @@ describe('xor', function() {
 	describe('decrypt', function() {
 
 		it('should decrypt the anh example correctly', function() {
-			var example_unencrypted = '00010002AB43E3D500FF001145327643D4F100';
-			var example_encrypted = '1D4F3285B60CD150B6F3D141F3C1A7022702F3';
+			var example_unencrypted = '00010002ab43e3d500ff001145327643d4f100';
+			var example_encrypted = '1d4f3285b60cd150b6f3d141f3c1a7022702f3';
 
 			var decrypted = xor.decrypt({
 				buffer: new Buffer(example_encrypted, 'hex'),
-				crcSeed: '1D4E3287'
+				crcSeed: 2268220957
 			});
-			decrypted.toString('hex').toUpperCase().should.equal(example_unencrypted);
+			decrypted.toString('hex').should.equal(example_unencrypted);
 		})
 
 		it('should decrypt this correctly', function() {
@@ -47,7 +47,7 @@ describe('xor', function() {
 
 			var decrypted = xor.decrypt({
 				buffer: new Buffer(encrypted, 'hex'),
-				crcSeed: 'a50a8e8a'
+				crcSeed: 2324564645
 			});
 			decrypted.toString('hex').should.equal(expected);
 

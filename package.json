@@ -1,17 +1,18 @@
 {
-	"author": "Todd Hooper",
-	"name": "swg",
-	"description": "Framework similar to ExpressJS adapted to the SOE SWG protocol for SWG servers/clients",
-	"version": "0.0.1",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/thoop/swg"
-	},
-	"dependencies": {
-		"lodash": "^4.16.0"
-	},
-	"devDependencies": {
-		"mocha": "^3.0.2",
-		"should": "^11.1.0"
-	}
+  "author": "Todd Hooper",
+  "name": "swg",
+  "description": "Framework similar to ExpressJS adapted to the SOE SWG protocol for SWG servers/clients",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thoop/swg"
+  },
+  "dependencies": {
+    "lodash": "^4.16.3"
+  },
+  "devDependencies": {
+    "mocha": "^3.0.2",
+    "should": "^11.1.0",
+    "sinon": "^1.17.6"
+  }
 }
