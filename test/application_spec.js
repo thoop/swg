@@ -33,6 +33,8 @@ describe('application', function() {
 			});
 
 		});
+
+		it('should acknowledge an incoming data packet automatically if it has a sequence number');
 	});
 
 

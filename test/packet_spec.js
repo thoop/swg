@@ -27,8 +27,9 @@ describe('packet', function() {
 	});
 
 	describe('deflate', function() {
-		it('should deflate and add the compression flag if compression is turned on', function(done) {
+		it('should deflate and add the compression flag if compression is turned on and length of buffer is long enough to trigger compression', function(done) {
 			defaults.useCompression = true;
+			defaults.receiveBufferSize = 62; //so compression is triggered from length
 
 			packet._deflateAndAddCompressionFlag({
 				buffer: Buffer.from('000900000400961f13410700737767616e68300600737767616e680e0032303035303430382d31383a3030', 'hex')

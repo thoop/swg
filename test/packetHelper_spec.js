@@ -210,6 +210,22 @@ describe('packetHelper', function() {
 			});
 		});
 
+		it('should take an soe 0015 packet and create a correct buffer to send', function(done) {
+			packetHelper.packetToBuffer({
+				crcSeed: 747506451,
+				crcLength: 2,
+				packet: {
+					soeOpcode: '0015',
+					sequence: 2
+				}
+			}, function(err, buffer) {
+
+				should.not.exist(err);
+				buffer.toString('hex').should.equal('0015131113fae4');
+				done();
+			});
+		});
+
 		it('should take a data packet and create a correct buffer to send', function(done) {
 			packetHelper.packetToBuffer({
 				crcSeed: 747506451,
