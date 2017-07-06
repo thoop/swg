@@ -135,4 +135,155 @@ describe('packet', function() {
 			packet._getHexInt(1, 8).should.equal('00000001');
 		});
 	});
+
+
+	describe('bufferToPacket', function() {
+
+		it('should parse a byte', function(done) {
+			packet.operands = [
+				{
+					name: 'ByteTest',
+					type: 'byte'
+				}
+			]
+
+			packet.bufferToPacket({buffer: Buffer.from('0a', 'hex')}, function(err, newPacket) {
+				newPacket.should.have.property('ByteTest', 10);
+				done();
+			});
+		});
+
+		it('should parse a short', function(done) {
+			packet.operands = [
+				{
+					name: 'ShortTest',
+					type: 'short'
+				},
+				{
+					name: 'LittleShortTest',
+					type: 'short',
+					endian: 'little'
+				}
+			]
+
+			packet.bufferToPacket({buffer: Buffer.from('0a000a00', 'hex')}, function(err, newPacket) {
+				newPacket.should.have.property('ShortTest', 2560);
+				newPacket.should.have.property('LittleShortTest', 10);
+				done();
+			});
+		});
+
+		it('should parse an int', function(done) {
+			packet.operands = [
+				{
+					name: 'IntTest',
+					type: 'int'
+				},
+				{
+					name: 'LittleIntTest',
+					type: 'int',
+					endian: 'little'
+				}
+			]
+
+			packet.bufferToPacket({buffer: Buffer.from('0a0000000a000000', 'hex')}, function(err, newPacket) {
+				newPacket.should.have.property('IntTest', 167772160);
+				newPacket.should.have.property('LittleIntTest', 10);
+				done();
+			});
+		});
+
+		it('should parse a long', function(done) {
+			packet.operands = [
+				{
+					name: 'LongTest',
+					type: 'long'
+				},
+				{
+					name: 'LittleLongTest',
+					type: 'long',
+					endian: 'little'
+				}
+			]
+
+			packet.bufferToPacket({buffer: Buffer.from('0a0000000a000000', 'hex')}, function(err, newPacket) {
+				newPacket.should.have.property('LongTest', 167772160);
+				newPacket.should.have.property('LittleLongTest', 10);
+				done();
+			});
+		});
+
+		it('should parse an a_string', function(done) {
+			packet.operands = [
+				{
+					name: 'AStringTest',
+					type: 'a_string'
+				}
+			]
+
+			packet.bufferToPacket({buffer: Buffer.from('070073776774657374', 'hex')}, function(err, newPacket) {
+				newPacket.should.have.property('AStringTest', 'swgtest');
+				done();
+			});
+		});
+
+		it('should parse a b_string', function(done) {
+			packet.operands = [
+				{
+					name: 'BStringTest',
+					type: 'b_string'
+				}
+			]
+
+			packet.bufferToPacket({buffer: Buffer.from('3c00000020000000150000000ed693ded2efbf8ea1acd2ee4c55be305fbe230db4ab58f962697967e8106ed3869b3a4a1a72a1fa8f96ff9fa5625a2901000000', 'hex')}, function(err, newPacket) {
+				newPacket.should.have.property('BStringTest', '20000000150000000ed693ded2efbf8ea1acd2ee4c55be305fbe230db4ab58f962697967e8106ed3869b3a4a1a72a1fa8f96ff9fa5625a2901000000');
+				done();
+			});
+		});
+
+		it('should parse a u_string', function(done) {
+			packet.operands = [
+				{
+					name: 'UStringTest',
+					type: 'u_string'
+				}
+			]
+
+			packet.bufferToPacket({buffer: Buffer.from('0300410042004300', 'hex')}, function(err, newPacket) {
+				newPacket.should.have.property('UStringTest', 'ABC');
+				done();
+			});
+		});
+
+		it.only('should parse an array', function(done) {
+			packet.operands = [
+				{
+					name: 'ServerCount',
+					type: 'int',
+					child: {
+						name: 'servers',
+						type: 'array',
+						operands: [
+							{
+								name: 'ServerName',
+								type: 'a_string'
+							}
+						]
+					}
+				}
+			]
+
+			packet.bufferToPacket({buffer: Buffer.from('0000000203004142430300444546', 'hex')}, function(err, newPacket) {
+				newPacket.should.have.property('ServerCount', 2);
+				newPacket.should.have.property('servers');
+				newPacket.servers.should.containEql({
+					ServerName: 'ABC'
+				});
+				newPacket.servers.should.containEql({
+					ServerName: 'DEF'
+				});
+				done();
+			});
+		});
+	});
 })

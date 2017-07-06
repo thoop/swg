@@ -1,8 +1,6 @@
 [![Stories in Ready](https://badge.waffle.io/thoop/swg.png)](http://waffle.io/thoop/swg)  
 
-Atwood's Law at work!
-
-Fun project for emulating a Star Wars Galaxies server built in javascript.
+Fun project for emulating a Star Wars Galaxies server built in javascript. Currently only tested on OSX.
 
 This is a framework similar to ExpressJS that has been adapted to the SOE SWG protocol for making SWG clients/servers.
 
