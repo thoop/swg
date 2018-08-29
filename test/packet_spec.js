@@ -1,6 +1,7 @@
 var should = require('should');
 var packet = require('../lib/network/packet');
 var defaults = require('../lib/defaults');
+var Buffer = require('safe-buffer').Buffer;
 
 describe('packet', function() {
 
@@ -58,7 +59,7 @@ describe('packet', function() {
 			var example_encrypted = '00091d4f3285b60cd150b6f3d141f3c1a7022702f3'; //took off ABCD crc value since CRC comes after encryption
 
 			packet._encrypt({
-				buffer: new Buffer(example_unencrypted, 'hex'),
+				buffer: Buffer.from(example_unencrypted, 'hex'),
 				crcSeed: 2268220957
 			}, function(err, buffer) {
 				buffer.toString('hex').should.equal(example_encrypted);
@@ -74,7 +75,7 @@ describe('packet', function() {
 			var example_encrypted = '00091d4f3285b60cd150b6f3d141f3c1a7022702f3';
 
 			packet._decrypt({
-				buffer: new Buffer(example_encrypted, 'hex'),
+				buffer: Buffer.from(example_encrypted, 'hex'),
 				crcSeed: 2268220957
 			}, function(err, buffer) {
 				buffer.toString('hex').should.equal(example_unencrypted);
@@ -87,7 +88,7 @@ describe('packet', function() {
 
 		it('should call the callback with an error if the crc is invalid', function(done) {
 			packet._checkAndRemoveCRC({
-				buffer: new Buffer('0009130b8a2c8514996d8214ea1ae5758472d5738401a214e56fca1ae55dfa2ad06dce1ae840ff22d270cfff8d54', 'hex'),
+				buffer: Buffer.from('0009130b8a2c8514996d8214ea1ae5758472d5738401a214e56fca1ae55dfa2ad06dce1ae840ff22d270cfff8d54', 'hex'),
 				crcSeed: 747506451,
 				crcLength: 2
 			}, function(err, newBuffer) {
@@ -100,7 +101,7 @@ describe('packet', function() {
 		it('should check and remove the CRC from the buffer if the CRC is valid', function(done) {
 
 			packet._checkAndRemoveCRC({
-				buffer: new Buffer('0009130b8a2c8514996d8214ea1ae5758472d5738401a214e56fca1ae55dfa2ad06dce1ae840ff22d270cfff8d56', 'hex'),
+				buffer: Buffer.from('0009130b8a2c8514996d8214ea1ae5758472d5738401a214e56fca1ae55dfa2ad06dce1ae840ff22d270cfff8d56', 'hex'),
 				crcSeed: 747506451,
 				crcLength: 2
 			}, function(err, newBuffer) {
