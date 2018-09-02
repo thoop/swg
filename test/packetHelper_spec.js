@@ -8,7 +8,7 @@ describe('packetHelper', function() {
 		it('should parse real soe_session_request request', function(done) {
 
 			packetHelper.bufferToPacket({
-				buffer: new Buffer('00010000000258b026ca000001f0', 'hex')
+				buffer: Buffer.from('00010000000258b026ca000001f0', 'hex')
 			}, function(err, soePacket) {
 
 				should.not.exist(err);
@@ -25,7 +25,7 @@ describe('packetHelper', function() {
 		it('should parse real soe_session_reply request', function(done) {
 
 			packetHelper.bufferToPacket({
-				buffer: new Buffer('000258b026ca28ffa004020104000001f0', 'hex')
+				buffer: Buffer.from('000258b026ca28ffa004020104000001f0', 'hex')
 			}, function(err, soePacket) {
 
 				should.not.exist(err);
@@ -45,7 +45,7 @@ describe('packetHelper', function() {
 		it('should parse real soe_net_status_req request', function(done) {
 
 			packetHelper.bufferToPacket({
-				buffer: new Buffer('00076b975d62095750faa96373fabda6736bbc59d4', 'hex'),
+				buffer: Buffer.from('00076b975d62095750faa96373fabda6736bbc59d4', 'hex'),
 				crcSeed: 747506451,
 				crcLength: 2
 			}, function(err, packet) {
@@ -58,7 +58,7 @@ describe('packetHelper', function() {
 		it('should parse real soe_net_status_res response', function(done) {
 
 			packetHelper.bufferToPacket({
-				buffer: new Buffer('00083869fb133c7ffb133c7ffb133c7dfb133c7dfb133c7cfb133c7cfb133c7dfb133c7dfb133c3e3c38f5', 'hex'),
+				buffer: Buffer.from('00083869fb133c7ffb133c7ffb133c7dfb133c7dfb133c7cfb133c7cfb133c7dfb133c7dfb133c3e3c38f5', 'hex'),
 				crcSeed: 747506451,
 				crcLength: 2
 			}, function(err, soePacket) {
@@ -72,7 +72,7 @@ describe('packetHelper', function() {
 		it('should parse real ack request', function(done) {
 
 			packetHelper.bufferToPacket({
-				buffer: new Buffer('0015131113fae4', 'hex'),
+				buffer: Buffer.from('0015131113fae4', 'hex'),
 				crcSeed: 747506451,
 				crcLength: 2
 			}, function(err, soePacket) {
@@ -87,7 +87,7 @@ describe('packetHelper', function() {
 		it('should parse real 0009 request', function(done) {
 
 			packetHelper.bufferToPacket({
-				buffer: new Buffer('0009130b8a2c8514996d8214ea1ae5758472d5738401a214e56fca1ae55dfa2ad06dce1ae840ff22d270cfff8d56', 'hex'),
+				buffer: Buffer.from('0009130b8a2c8514996d8214ea1ae5758472d5738401a214e56fca1ae55dfa2ad06dce1ae840ff22d270cfff8d56', 'hex'),
 				crcSeed: 747506451,
 				crcLength: 2
 			}, function(err, soePacket) {
@@ -108,7 +108,7 @@ describe('packetHelper', function() {
 
 		it('should parse another real 0009 request', function(done) {
 			packetHelper.bufferToPacket({
-				buffer: new Buffer('0009333a21b3a52532f2a2254185c5442fedf5422f9e82254ef0ea2b4ec2da1b7bf2ee2b43dfdf1379efefdf709b', 'hex'),
+				buffer: Buffer.from('0009333a21b3a52532f2a2254185c5442fedf5422f9e82254ef0ea2b4ec2da1b7bf2ee2b43dfdf1379efefdf709b', 'hex'),
 				crcSeed: 3005561395,
 				crcLength: 2
 			}, function(err, soePacket) {
@@ -129,7 +129,7 @@ describe('packetHelper', function() {
 
 		it('should parse a third real 0009 request', function(done) {
 			packetHelper.bufferToPacket({
-				buffer: new Buffer('0009333a21b3f5ac9319c9ac9319e9ac9319fcac9319f27a00c72095bf4981396da7cd6cd39792d2f09a2679a8634410d104ac00bfd72a9b859d30e92467bf7fdbf81a1d81d11b1d81d11b1d81d11c1df2a67b7c9cce4b7bf040', 'hex'),
+				buffer: Buffer.from('0009333a21b3f5ac9319c9ac9319e9ac9319fcac9319f27a00c72095bf4981396da7cd6cd39792d2f09a2679a8634410d104ac00bfd72a9b859d30e92467bf7fdbf81a1d81d11b1d81d11b1d81d11c1df2a67b7c9cce4b7bf040', 'hex'),
 				crcSeed: 3005561395,
 				crcLength: 2
 			}, function(err, soePacket) {
@@ -150,7 +150,7 @@ describe('packetHelper', function() {
 
 		it('should parse a real multi 0009 packet', function(done) {
 			packetHelper.bufferToPacket({
-				buffer: new Buffer('0009130a8e351d098e8c7e154f8c7e154f8e7e154f847d15f92a4b21f92a4b4b4bd37d', 'hex'),
+				buffer: Buffer.from('0009130a8e351d098e8c7e154f8c7e154f8e7e154f847d15f92a4b21f92a4b4b4bd37d', 'hex'),
 				crcSeed: 747506451,
 				crcLength: 2
 			}, function(err, soePacket) {
