@@ -15,5 +15,8 @@
     "mocha": "^3.0.2",
     "should": "^11.1.0",
     "sinon": "^1.17.6"
+  },
+  "scripts": {
+    "test": "./node_modules/.bin/mocha"
   }
 }

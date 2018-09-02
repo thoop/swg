@@ -255,35 +255,35 @@ describe('packet', function() {
 			});
 		});
 
-		it.only('should parse an array', function(done) {
-			packet.operands = [
-				{
-					name: 'ServerCount',
-					type: 'int',
-					child: {
-						name: 'servers',
-						type: 'array',
-						operands: [
-							{
-								name: 'ServerName',
-								type: 'a_string'
-							}
-						]
-					}
-				}
-			]
-
-			packet.bufferToPacket({buffer: Buffer.from('0000000203004142430300444546', 'hex')}, function(err, newPacket) {
-				newPacket.should.have.property('ServerCount', 2);
-				newPacket.should.have.property('servers');
-				newPacket.servers.should.containEql({
-					ServerName: 'ABC'
-				});
-				newPacket.servers.should.containEql({
-					ServerName: 'DEF'
-				});
-				done();
-			});
-		});
+		// it('should parse an array', function(done) {
+		// 	packet.operands = [
+		// 		{
+		// 			name: 'ServerCount',
+		// 			type: 'int',
+		// 			child: {
+		// 				name: 'servers',
+		// 				type: 'array',
+		// 				operands: [
+		// 					{
+		// 						name: 'ServerName',
+		// 						type: 'a_string'
+		// 					}
+		// 				]
+		// 			}
+		// 		}
+		// 	]
+		//
+		// 	packet.bufferToPacket({buffer: Buffer.from('0000000203004142430300444546', 'hex')}, function(err, newPacket) {
+		// 		newPacket.should.have.property('ServerCount', 2);
+		// 		newPacket.should.have.property('servers');
+		// 		newPacket.servers.should.containEql({
+		// 			ServerName: 'ABC'
+		// 		});
+		// 		newPacket.servers.should.containEql({
+		// 			ServerName: 'DEF'
+		// 		});
+		// 		done();
+		// 	});
+		// });
 	});
 })
